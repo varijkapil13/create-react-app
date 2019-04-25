@@ -185,7 +185,7 @@ module.exports = function(
   // which doesn't install react and react-dom along with react-scripts
   // or template is presetend (via --internal-testing-template)
   if (!isReactInstalled(appPackage) || template) {
-    console.log(`Installing react and react-dom using ${command}...`);
+    console.log(`Installing react and react-dom and redux using ${command}...`);
     console.log();
 
     const proc = spawn.sync(command, args, { stdio: 'inherit' });
@@ -193,6 +193,46 @@ module.exports = function(
       console.error(`\`${command} ${args.join(' ')}\` failed`);
       return;
     }
+  }
+
+  // install redux dependencies
+  let reduxArgs;
+  if (useYarn) {
+    reduxArgs = ['add'];
+  } else {
+    reduxArgs = ['install', '--save', verbose && '--verbose'].filter(e => e);
+  }
+  reduxArgs.push('react-redux', 'redux', 'redux-saga', 'react-router-dom');
+
+  console.log();
+  console.log(`Installing redux using ${command}...`);
+  console.log();
+
+  const reduxProc = spawn.sync(command, reduxArgs, { stdio: 'inherit' });
+  if (reduxProc.status !== 0) {
+    console.error(`\`${command} ${reduxArgs.join(' ')}\` failed`);
+    return;
+  }
+
+  // install developer dependencies for redux-devtools
+  let devArgs;
+  if (useYarn) {
+    devArgs = ['add', '--dev'];
+  } else {
+    devArgs = ['install', '--dev', '--save', verbose && '--verbose'].filter(
+      e => e
+    );
+  }
+  devArgs.push('redux-devtools-extension');
+
+  console.log();
+  console.log(`Installing redux-devtools using ${command}...`);
+  console.log();
+
+  const devProc = spawn.sync(command, devArgs, { stdio: 'inherit' });
+  if (devProc.status !== 0) {
+    console.error(`\`${command} ${devArgs.join(' ')}\` failed`);
+    return;
   }
 
   if (useTypeScript) {

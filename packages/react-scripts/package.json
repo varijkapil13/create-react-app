@@ -1,14 +1,23 @@
 {
-  "name": "react-scripts",
-  "version": "2.1.8",
-  "description": "Configuration and scripts for Create React App.",
-  "repository": "facebook/create-react-app",
+  "name": "react-scripts-redux-saga",
+  "version": "1.0.0",
+  "keywords": [
+    "react-redux",
+    "redux-saga",
+    "create-react-app",
+    "redux",
+    "create react app redux",
+    "cli",
+    "react cli"
+  ],
+  "description": "Configuration and scripts for Create React App with Redux, React-Redux and Redux-Saga.",
+  "repository": "varijkapil13/react-scripts-redux-saga",
   "license": "MIT",
   "engines": {
     "node": ">=8.10"
   },
   "bugs": {
-    "url": "https://github.com/facebook/create-react-app/issues"
+    "url": "https://github.com/varijkapil13/react-scripts-redux-saga/issues"
   },
   "files": [
     "bin",
@@ -73,6 +82,12 @@
     "workbox-webpack-plugin": "3.6.3"
   },
   "devDependencies": {
+    "semantic-release": "^15.13.3",
+    "@semantic-release/commit-analyzer": "^6.1.0",
+    "@semantic-release/git": "^7.0.8",
+    "@semantic-release/github": "^5.2.10",
+    "@semantic-release/npm": "^5.1.4",
+    "@semantic-release/release-notes-generator": "^7.1.4",
     "react": "^16.8.4",
     "react-dom": "^16.8.4"
   },

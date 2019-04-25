@@ -1,8 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { connect } from 'react-redux';
+import { sampleAppAction } from './redux/actions/app-actions';
 
-function App() {
+function App(props) {
   return (
     <div className="App">
       <header className="App-header">
@@ -18,9 +20,27 @@ function App() {
         >
           Learn React
         </a>
+
+        <h3>{props.data}</h3>
+
+        <button onClick={() => props.sampleAppAction()}>
+          Fire Saga action
+        </button>
       </header>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    data: state.app.data,
+  };
+};
+const mapDispatchToProps = {
+  sampleAppAction,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
